@@ -1,2 +1,3 @@
 # flask-carnival
-Will be updated soon
+This is a student-event portal.
+Made with the love for python
