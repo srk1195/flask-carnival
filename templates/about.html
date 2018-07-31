@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Chat with us and others</h1>
+<div class="panel-group">
+    <ul class="list-group">
+        <div class="panel panel">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Come & chat!</a>
+                </h5>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+
+                <ul id="messages" class="list-group">
+                </ul>
+                <div class="form-group">
+                    <label for="usr"></label>
+                    <input id="myMessage" type="text" placeholder="chat here" class="form-control" id="usr">
+                </div>
+
+                <button class="btn btn-primary" type="button" id="sendbutton" class="button-btn btn-sm"> send </button>
+
+            </div>
+        </div>
+    </ul>
+</div>
+
+{% endblock content %}

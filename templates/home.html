@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if events %}
+{% for item in events.items %}
+<script>
+$(function () {
+  $('#colls').on('click', function(e) {
+    $('.panel-collapse').collapse('toggle');
+  })
+});
+
+</script>
+<div class="card card border-secondary" style="max-width: 48rem;">
+    <div class="card mb-3  mb-3">
+        <img class="card-img-top" src="static/images/{{ item.image_file }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ item.title | capitalize}}</h5>
+            <p class="card-text">
+                {{ item.des1 | capitalize }}
+            </p>
+            <p class="card-text">{{ item.des2 | capitalize }}</p>
+            <p class="card-text">
+                <small class="text-muted">Event will be on {{ item.event_date }}</small>
+            </p>
+            {{ moment(current_time).fromNow(refresh = True) }}
+            {{ moment().fromTime(current_time) }}
+            <div class="card-footer border-primary bg-transparent">
+                <p>
+
+                <div class="dropdown">
+                    <button type="button" class="btn btn-outline-secondary btn-sm">
+                        <i class="material-icons" style="font-size:14px">&#xe8dc;</i>
+                        &nbsp;
+                        <span class="badge badge-primary badge-pill">{{ item.likes }}</span>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" style="float:center;">
+                        Quick Details
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm m-1"
+                            onclick="location.href= '{{ url_for('event',event_id=item.id) }}';"
+                            style="float:right;">
+                        Register
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-header text-white bg-primary">
+                                When And Where
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div>
+                                        <i class="material-icons" style="font-size:18px;color:#007bff">event</i>
+                                        &nbsp;
+                                        {{ item.event_date }}
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="material-icons"
+                                       style="font-size:18px;color:#007bff">location_on</i>
+                                    &nbsp;
+                                    {{ item.event_place | capitalize }}
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="material-icons" style="font-size:18px;color:#007bff">access_time</i>
+                                    &nbsp;
+                                    {{ item.event_time }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+</div>
+<hr>
+{%endfor%}
+{%endif%}
+{% for page_num in events.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+{% if page_num %}
+{% if events.page == page_num %}
+<a class="btn btn-info mb-2" href=" {{ url_for('home',page=page_num) }} "> {{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-2" href=" {{ url_for('home',page=page_num) }} "> {{ page_num }}</a>
+{% endif %}
+{% else %}
+...
+{% endif %}
+{%endfor%}
+{% endblock content %}

@@ -1,0 +1,148 @@
+{% extends "layout.html" %} {% from "macros.html" import render_new_field %} {% from "macros.html" import render_radio_fields
+%} {% block content %}
+<div class="content-section">
+    <div class="media">
+        <img class="img-fluid rounded account-img" src="{{ image_file }}">
+        <div class="media-body">
+            <h2 class="account-heading">Mr. {{ current_user.username |capitalize }}</h2>
+            <p class="text-muted">{{ current_user.email }}</p>
+        </div>
+    </div>
+    <form method="POST" aaction="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            {{ render_new_field(form.username, placeholder='Pick a Username') }} {{ render_new_field(form.phone,placeholder='Drop us
+            Your Phone Number') }} {{ render_new_field(form.birthday,type="date") }} {{ render_radio_fields(form.gender)
+            }}
+            <div class="custom-file">
+                {{ form.picture.label(class="form-control-label") }} {{ form.picture() }}
+            </div>
+            {% if form.picture.errors %} {% for error in form.picture.errors %} {{ error }} {%endfor%} {%endif %}
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-primary") }}
+        </div>
+    </form>
+</div>
+<br>
+<br>
+<div class="container">
+    <table class="table table-bordered table-striped table-md">
+        <caption>Registered Events</caption>
+        <thead class="thead-dark">
+            <tr align="center" class="success">
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in events %}
+            <tr align="center" class="table-warning">
+                <td>{{ item.title | capitalize}}</td>
+                <td>{{ item.event_date }}</td>
+                <td>{{ item.event_place | capitalize }}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">
+                        Un-Register
+                    </button>
+                </td>
+            </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                <b>Oh you'r going away!</b>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Do you really want to Un-Register??
+                                <p>
+                                    <strong>We will miss you !!</strong>
+                                </p>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success btn-sm m-1" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger btn-sm m-1" onclick="location.href= '{{ url_for('event_delete',event_id=item.id) }}';">
+                                Un-Register
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<br>
+<br>
+<div class="container">
+</div>
+<div class="container">
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: ["Attended", "Un-Registered", "Won", "Registered"],
+                datasets: [{
+                    label: "Student-Carnival Details",
+                    data: {{ make }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+            },
+
+        // Configuration options go here
+        options: {
+
+            legend: {
+                display: true,
+                    labels: {
+                    fontColor: 'rgb(255, 99, 132)'
+                }
+            }
+        }
+        });
+
+
+
+
+    </script>
+</div>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Click Here to
+        <a class="ml-2" href="{{ url_for('home') }}">Home</a>
+    </small>
+</div>
+{% endblock %}

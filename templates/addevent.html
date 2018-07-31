@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% from "macros.html" import render_new_field %}
+{% from "macros.html" import render_radio_fields  %}
+{% block content %}
+<div class="content-section">
+    <div class="media">
+        <legend> Add Events To Home </legend>
+    </div>
+    <form method="POST" aaction="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            {{ render_new_field(form.title, placeholder='Add a title') }}
+            {{ render_new_field(form.des1,placeholder='Main Description') }}
+            {{ render_new_field(form.des2,placeholder='Secondary Description') }}
+            {{ render_new_field(form.event_place,placeholder='Choose some hall') }}
+            {{ render_new_field(form.event_date,type="date") }}
+            {{ render_new_field(form.event_time) }}
+            <div class="custom-file">
+                {{ form.picture.label(class="form-control-label") }}
+                {{ form.picture() }}
+            </div>
+            {% if form.picture.errors %}
+                {% for error in form.picture.errors %}
+                    {{ error }}
+                {%endfor%}
+            {%endif %}
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-primary") }}
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}

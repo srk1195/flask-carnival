@@ -1,0 +1,79 @@
+{% macro display_name(a)%}
+<li>{{a}}</li>
+{% endmacro %} {% macro display_li(a) %} {{a| upper}} {% endmacro %}
+
+<p>
+    {%macro display_dic(a,b)%}
+    <b>{{a |capitalize}} ----$ {{b}} </b> {% endmacro %}
+</p>
+<p>
+    {% macro display_flash() %}
+    {% for message in get_flashed_messages() %}
+    {% if message %}
+<ul>
+    <li> {{ message }}</li>
+</ul>
+{% endif %}
+{% endfor %}
+{% endmacro %}
+</p>
+<p>
+    {%macro render_field(field) %}
+<div>
+    <label for="field.fname" class="w3-text-teal">
+        <b>{{field.label.text}}</b>
+    </label>
+    <div>
+        {{ field(class_='w3-input w3-animate-input',type='text',style="width:30%",**kwargs)|safe }}
+        {% if field.errors %}
+        <div class="w3-panel w3-red">
+            {% for error in field.errors %}
+            <li style="color:brown;" class="flashes">
+                <span> {{error}} </span>
+                <br>
+            </li>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endmacro %}
+</p>
+<p>
+    {%macro render_new_field(field) %}
+<div class="form-group ">
+    <!--{{ field.label.text }}--> <!-- This is used if you have no custom styles-->
+    {{ field.label(class="form-control-label") }}
+    {% if field.errors %}
+    {{ field(class="form-control form-control-lg is-invalid") }}
+    <div class="invalid-feedback">
+        {% for error in field.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{ field(class="form-control form-control-sm",**kwargs)|safe }}
+    {% endif %}
+</div>
+{% endmacro %}
+
+</p>
+<p>
+    {% macro render_radio_fields(field) %}
+<div class="form-group">
+    {{ field.label(class="form-control-label",**kwargs)|safe}}
+    <div class="col-lg-10">
+        {% for subfield in field %}
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                {{ subfield }}
+                {{ subfield.label.text }}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endmacro %}
+</p>
+

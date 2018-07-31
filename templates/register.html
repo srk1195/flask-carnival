@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% from "macros.html" import render_new_field %}
+{% from "macros.html" import render_radio_fields  %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            {{ render_new_field(form.username, placeholder='Pick a Username') }}
+            {{ render_new_field(form.email,placeholder='Pick a Email')}}
+            {{ render_new_field(form.password,placeholder='Type a Password') }}
+            {{ render_new_field(form.confirm_password,placeholder='Re-type password') }}
+            {{ render_new_field(form.phone,placeholder='Drop us Your Phone Number') }}
+            {{ render_new_field(form.birthday,type="date") }}
+            {{ render_radio_fields(form.gender) }}
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-primary") }}
+        </div>
+    </form>
+</div>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+    </small>
+</div>
+{% endblock %}
