@@ -1,0 +1,12 @@
+{% extends 'admin/master.html' %} {% block head_css %} {{super()}}
+<link href=" {{url_for('static', filename = 'w3.css') }} " rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Hanalei+Fill|Kirang+Haerang" rel="stylesheet"> {% endblock %} {% block scripts %} {{super()}} {% endblock %} {% block body %}
+<div class="w3-panel w3-sand w3-leftbar">
+    <span style="font-size:150px;line-height:0.6em;opacity:0.2">&#10077;</span>
+    <span class="w3-serif w3-xlarge" style="font-family: 'Kirang Haerang', cursive;">
+        Evolution forged entirety of sentient Life On this planet using only one tool .....
+        <strong style="color:red">Mistake</strong>
+    </span>
+    <!--<p class="w3-right"> Robert Ford</p>-->
+</div>
+{% endblock %}
