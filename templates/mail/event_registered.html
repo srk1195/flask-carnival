@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New User Registration</title>
+    <link rel="stylesheet" href=" {{url_for('static', filename = 'w3.css') }} ">
+</head>
+
+<body>
+    <div class="w3-panel w3-border w3-light-grey w3-round-large">
+        <p>
+            Hey {{ name }}, Congrats your seat has been booked for the event
+            <i> {{ event_title }} </i>.
+            <br>
+            <b>Cheers</b>
+            <br>
+            <br> You can checkout
+            <a href="{{ url_for('account') }}">here</a> for the event details:
+
+            <i style="color: aquamarine">Note : This is an machine Generated Email. Do not respond.</i>
+        </p>
+    </div>
+
+</body>
+
+</html>

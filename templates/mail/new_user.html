@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New User Registration</title>
+    <link rel="stylesheet" href=" {{url_for('static', filename = 'w3.css') }} ">
+</head>
+
+<body>
+    <div class="w3-panel w3-border w3-light-grey w3-round-large">
+        <p>
+            Hey {{ name }}, Welcome to the our page. Thanks for signing up. We are here for you 24*7, 365 Days.
+            <br>
+            <b>Cheers</b>
+            <br>
+            <br> You can Login Here:
+            <a href="{{ url_for('login') }}"></a>
+            <i style="color: aquamarine">Note : This is an machine Generated Email. Do not respond.</i>
+        </p>
+    </div>
+
+</body>
+
+</html>
